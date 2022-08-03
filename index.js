@@ -27,6 +27,7 @@ const session = signIn("ShopBot", process.env.PASS).then(async session => {
 arrays, texts, and functions
 data
 working
+laboring
 adErr
 getRandomInt
 */
@@ -47,6 +48,8 @@ const data = { //Default Data
 const adErr = 'You do not have enough money to purchase this product.'
 
 const working = []
+
+const laboring = []
 
 function getRandomInt(min, max) {
   return Math.floor(
@@ -290,6 +293,25 @@ appendEventListener("newPost", async function(post) {
             break;
           }
         case '?labor':
+          if (laboring.includes(author.id)) {
+            chat.reply(`Your workers are working. "Patience you must have, my young padawan." - Yoda(?)`)
+            return;
+          }
+          if (d.workers != 0) {
+          chat.reply(`Your workers started working for 5 days. (2 minutes)`)
+          laboring.push(author.id)
+          const workergain = d.workers * d.items * d.shoppers / 5
+          setTimeout(function(){
+            chat.reply(`Your workers have finished working and earned ${workergain}`)
+            laboring.splice(laboring.indexOf(author.id), 1)
+            d.money += parseInt(workergain)
+            db.set(author.id, JSON.stringify(d))
+          }, 120000)
+          }
+          if (d.workers == 0) {
+            chat.reply("You don't have any workers and cannot run this command.")
+            break;
+          }
           break;
 
           /*
@@ -332,9 +354,9 @@ Update Log
 0.5 - Added the main command (?work)
 0.65 - Added stats menu
 0.7 - Added 5 ads & Finished help menu
-0.8 (current) - Adding back workers & Spots
+0.8 - Added back workers & Spots
 Estimations
-0.9 - Way to get more Items
+0.9 - (current) Way to get more Items
 0.95 - Finishing touches & Ranks
 1.0 - Release
 */
