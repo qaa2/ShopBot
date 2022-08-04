@@ -1,4 +1,4 @@
- /*
+/*
 npms
 current:
 simple-json-db 2.0.0
@@ -69,10 +69,10 @@ appendEventListener("newPost", async function(post) {
     if (d.nickname == undefined && d.money != undefined) {
       post.sendChat(`Hey @${author.username} ! Welcome back to ShopBot!`)
     }
-    if (d.nickname == undefined )
-    if (d.nickname != undefined) {
-      post.sendChat(`Hey ${d.nickname}! Welcome back to ShopBot!`)
-    }
+    if (d.nickname == undefined)
+      if (d.nickname != undefined) {
+        post.sendChat(`Hey ${d.nickname}! Welcome back to ShopBot!`)
+      }
     post.onChat(function(chat) {
       const c = chat.text.trim().split(" ")
         ;
@@ -281,12 +281,12 @@ appendEventListener("newPost", async function(post) {
               chat.reply('Things you can change || Spot || Nickname')
           }
         case '?hire':
-              if (d.money >= 100 * c[1]) {
-                chat.reply(`You bought ${c[1]} workers. Cost: $${100 * c[1]}.`)
-                d.money -= 100 * c[1]
-                d.workers += parseInt(c[1])
-                db.set(author.id, JSON.stringify(d))
-                break;
+          if (d.money >= 100 * c[1]) {
+            chat.reply(`You bought ${c[1]} workers. Cost: $${100 * c[1]}.`)
+            d.money -= 100 * c[1]
+            d.workers += parseInt(c[1])
+            db.set(author.id, JSON.stringify(d))
+            break;
           }
           if (d.money < 100 * c[1]) {
             chat.reply(`You don't have enough money to buy ${c[1]} workers.`)
@@ -298,25 +298,25 @@ appendEventListener("newPost", async function(post) {
             return;
           }
           if (d.workers != 0) {
-          chat.reply(`Your workers started working for 5 days. (2 minutes)`)
-          laboring.push(author.id)
-          const workergain = d.workers * d.items * d.shoppers / 5
-          setTimeout(function(){
-            chat.reply(`Your workers have finished working and earned ${workergain}`)
-            laboring.splice(laboring.indexOf(author.id), 1)
-            d.money += parseInt(workergain)
-            db.set(author.id, JSON.stringify(d))
-          }, 120000)
+            chat.reply(`Your workers started working for 5 days. (2 minutes)`)
+            laboring.push(author.id)
+            const workergain = d.workers * d.items * d.shoppers / 5
+            setTimeout(function() {
+              chat.reply(`Your workers have finished working and earned ${workergain}`)
+              laboring.splice(laboring.indexOf(author.id), 1)
+              d.money += parseInt(workergain)
+              db.set(author.id, JSON.stringify(d))
+            }, 120000)
           }
           if (d.workers == 0) {
-            chat.reply("You don't have any workers and cannot run this command.")
+            chat.reply("You don't have any workers and cannot run this command. (A worker is $100)")
             break;
           }
           break;
 
-          /*
-          Easter Eggs
-          */
+        /*
+        Easter Eggs
+        */
 
         case '?sus':
           chat.reply(`You have unlocked the holy command and now have access to run the command "???". This will set your rank to sus which you can use to flex on people.`)
