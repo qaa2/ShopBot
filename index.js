@@ -314,6 +314,13 @@ appendEventListener("newPost", async function(post) {
           }
           break;
 
+        case '?transport':
+          switch(c[1]) {
+            case '':
+          chat.reply(`You transported ${itemgain} items from`)
+          break;
+          }
+
         /*
         Easter Eggs
         */
@@ -356,7 +363,8 @@ Update Log
 0.7 - Added 5 ads & Finished help menu
 0.8 - Added back workers & Spots
 Estimations
-0.9 - (current) Way to get more Items
-0.95 - Finishing touches & Ranks
+0.9 - (current) Way to get more Items & Ranks
+0.95 - Finishing touches & Finishing the entire help menu
+0.99 - Final bug fixes
 1.0 - Release
 */
