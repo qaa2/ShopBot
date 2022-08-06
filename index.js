@@ -38,9 +38,10 @@ const data = { //Default Data
   shoppers: 1,
   spot: "Thrift Shop",
   prestige: 0,
-  workers: 0
-  /*
+  workers: 0,
   rank: "User"
+  /*
+  hmm
   coming in a later update
   */
 }
@@ -66,6 +67,7 @@ appendEventListener("newPost", async function(post) {
       db.set(author.id, JSON.stringify(data))
     }
     const d = JSON.parse(db.get(author.id))
+    const d2 = JSON.parse(db.get(c[1]))
     if (d.nickname == undefined && d.money != undefined) {
       post.sendChat(`Hey @${author.username} ! Welcome back to ShopBot!`)
     }
@@ -315,10 +317,10 @@ appendEventListener("newPost", async function(post) {
           break;
 
         case '?transport':
-          switch(c[1]) {
+          switch (c[1]) {
             case '':
-          chat.reply(`You transported ${itemgain} items from`)
-          break;
+              chat.reply(`You transported ${itemgain} items from`)
+              break;
           }
 
         /*
@@ -330,6 +332,24 @@ appendEventListener("newPost", async function(post) {
           break;
         case '???':
           chat.reply(`You have unlocked the power to become sus rank. Find the code in this video to get it. https://www.youtube.com/watch?v=Mdq6sQPKYqQ (Hint: It's at 4 ~ 9 seconds.)`)
+          break;
+
+        /*
+        Admin Commands
+        */
+
+        case '?setmod':
+          if (d.rank == "Admin" || d.rank == "Moderator" || d.rank == "Owner") {
+            if (db.get(c[1]) != undefined) {
+              d2.rank = "Moderator"
+              db.set(c[1], JSON.stringify(d2))
+              post.sendChat("Rank set!")
+            }
+          }
+          if (c[1] == undefined)
+            if (d.rank == "User") {
+              post.sendChat("You cannot use this command.")
+            }
       }
     })
   }
