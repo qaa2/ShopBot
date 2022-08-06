@@ -67,7 +67,6 @@ appendEventListener("newPost", async function(post) {
       db.set(author.id, JSON.stringify(data))
     }
     const d = JSON.parse(db.get(author.id))
-    const d2 = JSON.parse(db.get(c[1]))
     if (d.nickname == undefined && d.money != undefined) {
       post.sendChat(`Hey @${author.username} ! Welcome back to ShopBot!`)
     }
@@ -338,18 +337,9 @@ appendEventListener("newPost", async function(post) {
         Admin Commands
         */
 
-        case '?setmod':
-          if (d.rank == "Admin" || d.rank == "Moderator" || d.rank == "Owner") {
-            if (db.get(c[1]) != undefined) {
-              d2.rank = "Moderator"
-              db.set(c[1], JSON.stringify(d2))
-              post.sendChat("Rank set!")
-            }
-          }
-          if (c[1] == undefined)
-            if (d.rank == "User") {
-              post.sendChat("You cannot use this command.")
-            }
+      }
+      if (!c[0].includes(c[0])) {
+        post.reply(`${c[0]} is not a command.`)
       }
     })
   }
@@ -383,7 +373,7 @@ Update Log
 0.7 - Added 5 ads & Finished help menu
 0.8 - Added back workers & Spots
 Estimations
-0.9 - (current) Way to get more Items & Ranks
+0.9 - (current) Way to get more Items
 0.95 - Finishing touches & Finishing the entire help menu
 0.99 - Final bug fixes
 1.0 - Release
