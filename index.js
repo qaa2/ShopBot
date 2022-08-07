@@ -317,10 +317,14 @@ appendEventListener("newPost", async function(post) {
 
         case '?transport':
           switch (c[1]) {
-            case '':
-              chat.reply(`You transported ${itemgain} items from`)
+            case 'farmer':
+              var itemgain = getRandomInt(1, 5)
+              chat.reply(`You transported ${itemgain} items from a farmer.`)
+              d.items += itemgain
+              db.set(author.id, JSON.stringify(d))
               break;
           }
+          break;
 
         /*
         Easter Eggs
@@ -336,10 +340,6 @@ appendEventListener("newPost", async function(post) {
         /*
         Admin Commands
         */
-
-      }
-      if (!c[0].includes(c[0])) {
-        post.reply(`${c[0]} is not a command.`)
       }
     })
   }
