@@ -1,13 +1,3 @@
-/*
-npms
-current:
-simple-json-db 2.0.0
-express 4.18.1
-@types/node 18.6.3
-node-fetch 3.2.10
-photopjs 1.0.0
-*/
-
 import JSONdb from 'simple-json-db'
 
 const db = new JSONdb('storage.json')
