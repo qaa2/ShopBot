@@ -13,15 +13,6 @@ const session = signIn("ShopBot", process.env.PASS).then(async session => {
   console.log('Never gonna tell a lie and hurt you')
 })
 
-/*
-arrays, texts, and functions
-data
-working
-laboring
-adErr
-getRandomInt
-*/
-
 const data = { //Default Data
   money: 0,
   items: 1,
